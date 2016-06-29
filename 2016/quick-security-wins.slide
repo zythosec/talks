@@ -1,0 +1,90 @@
+Gopher Security
+Quick Security Wins in Go
+
+Ross Nanopoulos
+Senior Software Engineer, Komand (We're hiring!)
+@rossnanop
+ross@komand.com
+
+* Disclaimer
+This talk does not imply security
+You still must implement other security controls for your application
+This talk only provides a starting point for writing more secure web applications
+
+* What is this talk not?
+- How to exploit web applications
+
+* What is this talk then?
+- How to protect against certain exploits
+
+* net/http Handler
+- func(w http.ResponseWriter, r *http.Request)
+
+* middleware
+- func (a *MySecureHandler) Handle(next http.Handler) http.Handler
+
+* MySecureHandler
+.code quick-security-wins/securehandler/securehandler.go /START OMIT/,/END OMIT/
+
+* Allowed Hosts
+.code quick-security-wins/allowedhosts/options.go /START OMIT/,/END OMIT/
+- A list of fully qualified domain names (FQDN) that are allowed
+- Prevents cache poisoning
+- Random domains cannot be pointed at your site
+
+* Allowed Hosts
+.code quick-security-wins/allowedhosts/main.go /START OMIT/,/END OMIT/
+
+* X-XSS-Protection
+- 0	Filter disabled.
+- 1	Filter enabled. If a cross-site scripting attack is detected, in order to stop the attack, the browser will sanitize the page.
+- 1; mode=block	Filter enabled. Rather than sanitize the page, when a XSS attack is detected, the browser will prevent rendering of the page.
+- 1; report=http://[YOURDOMAIN]/your_report_URI	Filter enabled. The browser will sanitize the page and report the violation. This is a Chromium function utilizing CSP violation reports to send details to a URI of your choice.
+
+* X-XSS-Protection
+.code quick-security-wins/xxssprotection/main.go /START OMIT/,/END OMIT/
+
+* Content-Type
+.code quick-security-wins/contenttype/main.go /START OMIT/,/END OMIT/
+
+* X-Content-Type-Options
+- “nosniff” prevents IE and Chrome from content sniffing a response away from its actual content type
+- Reduces exposure to drive-by download attacks
+Note: Content Sniffing is the inspecting the content of a byte stream to attempt to deduce the file format of the data within it
+
+* X-Content-Type-Options
+.code quick-security-wins/xcontenttypeoptions/main.go /START OMIT/,/END OMIT/
+
+* X-Frame-Options
+- Improves the protection of web applications against Clickjacking
+- Policy on if browser must not display the transmitted content in frames of other web pages
+
+3 options for the X-Frame-Options:
+
+"DENY" prevents a page from being loaded in an iframe
+"SAMEORIGIN" only allows a page to be loaded in an iframe from the same origin as itself
+"ALLOW-FROM" uri only allows a page to be loaded in an iframe on the specified URI
+
+* X-Frame-Options
+.code quick-security-wins/xframeoptions/main.go /START OMIT/,/END OMIT/
+
+* HTTPS
+.code quick-security-wins/ssl/main.go /START OMIT/,/END OMIT/
+
+* HTTPS
+.code quick-security-wins/ssl/handler.go /START OMIT/,/END OMIT/
+
+* HTTPS
+.code quick-security-wins/ssl/handler2.go /START OMIT/,/END OMIT/
+
+* HTTPS
+.code quick-security-wins/ssl/handler3.go /START OMIT/,/END OMIT/
+
+* HTTPS
+.code quick-security-wins/ssl/handler4.go /START OMIT/,/END OMIT/
+
+* References
+- [[https://github.com/unrolled/secure]]
+- [[https://www.securityknowledgeframework.org/]]
+- [[https://www.owasp.org/index.php/OWASP_Secure_Headers_Project]]
+
