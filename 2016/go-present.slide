@@ -14,10 +14,12 @@ ross@komand.com
 : here are some presenter notes that I may want to use
 
 * html
-.html go-present/index.html
+HTML is not supported on talks.godoc.org :(
+Use this to do html:
+- ".html go-present/index.html"
 
 * iframe
-.iframe http://localhost
+.iframe https://komand.com
 
 * Here are our guests!
 .link http://twitter.com/lolamicropanda @lolamicropanda
