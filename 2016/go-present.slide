@@ -1,0 +1,30 @@
+Go Present!
+(featuring special guests)
+30 Aug 2016
+Tags: go, present
+
+Ross Nanopoulos
+Senior Software Engineer, Komand
+ross@komand.com
+@rossnanop
+
+* x/tools/present
+.link https://godoc.org/golang.org/x/tools/present some text
+
+: here are some presenter notes that I may want to use
+
+* html
+.html go-present/index.html
+
+* iframe
+.iframe http://localhost
+
+* Here are our guests!
+.link http://twitter.com/lolamicropanda @lolamicropanda
+.link http://twitter.com/securicats @SecuriCats
+
+* MicroPandas and SecuriCats
+.code go-present/main.go /ONE OMIT/,/ONE OMIT/
+
+* Run Code
+.play go-present/main.go /^func main/,/^}/
